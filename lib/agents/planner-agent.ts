@@ -21,12 +21,12 @@ export class PlannerAgent extends BaseAgent {
 
   defineCapabilities(): AgentCapabilities {
     return {
-      canHandle: (task: TaskContext) => task.type === 'parse_prompt' || task.type === 'plan_experiment',
-      estimateSuccess: (task: TaskContext) => {
+      canHandle: (_task: TaskContext) => _task.type === 'parse_prompt' || _task.type === 'plan_experiment',
+      estimateSuccess: (_task: TaskContext) => {
         // Use memory to estimate success based on past performance
         const similar = this.memory.longTerm.successfulGuides.filter(g => 
-          (task.gene && g.context.includes(task.gene)) || 
-          (task.editType && g.context.includes(task.editType))
+          (_task.gene && g.context.includes(_task.gene)) || 
+          (_task.editType && g.context.includes(_task.editType))
         )
         return similar.length > 0 ? 0.9 : 0.7
       },
