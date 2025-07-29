@@ -1,7 +1,7 @@
 import type { AgentMessage, Guide } from "../types"
 import type { PlanObject } from "./planner-agent"
 import { mockGenome } from "../genome-data"
-import { BaseAgent, type AgentCapabilities, type TaskContext } from "./base-agent" // eslint-disable-line @typescript-eslint/no-unused-vars
+import { BaseAgent, type AgentCapabilities, type TaskContext } from "./base-agent"
 import { generateMessageId } from "../utils"
 
 export class GuideDesigner extends BaseAgent {
@@ -24,14 +24,14 @@ export class GuideDesigner extends BaseAgent {
     }
   }
 
-  canHandle(task: TaskContext): boolean {
-    return task.type === 'guide_design' || task.type === 'design_guides'
+  canHandle(_task: TaskContext): boolean {
+    return _task.type === 'guide_design' || _task.type === 'design_guides'
   }
 
-  estimateSuccess(task: TaskContext): number {
+  estimateSuccess(_task: TaskContext): number {
     // Use memory to estimate success based on past performance
     const similar = this.memory.longTerm.successfulGuides.filter(g => 
-      g.context.includes(task.gene || '') || g.context.includes(task.editType || '')
+      g.context.includes(_task.gene || '') || g.context.includes(_task.editType || '')
     )
     return similar.length > 0 ? 0.95 : 0.8
   }
