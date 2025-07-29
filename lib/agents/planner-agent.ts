@@ -243,17 +243,17 @@ IMPORTANT: Return ONLY the JSON object above. No markdown formatting, no backtic
   }
 
   // Implement abstract methods from BaseAgent
-  canHandle(task: TaskContext): boolean {
-    return task.type === 'parse_prompt' || 
-           task.type === 'plan_experiment' ||
-           task.type === 'validate_gene_symbol'
+  canHandle(_task: TaskContext): boolean {
+    return _task.type === 'parse_prompt' || 
+           _task.type === 'plan_experiment' ||
+           _task.type === 'validate_gene_symbol'
   }
 
-  estimateSuccess(task: TaskContext): number {
-    const baseEstimate = this.capabilities.estimateSuccess(task)
+  estimateSuccess(_task: TaskContext): number {
+    const baseEstimate = this.capabilities.estimateSuccess(_task)
     
     // Adjust based on task complexity
-    const prompt = task.prompt as string | undefined
+    const prompt = _task.prompt as string | undefined
     if (prompt && prompt.length > 200) {
       return baseEstimate * 0.9 // Complex prompts are harder
     }
