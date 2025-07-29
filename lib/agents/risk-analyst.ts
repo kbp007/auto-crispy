@@ -1,5 +1,5 @@
 import type { AgentMessage, Guide } from "../types"
-import { BaseAgent, type AgentCapabilities, type TaskContext } from "./base-agent"
+import { BaseAgent, type AgentCapabilities, type TaskContext } from "./base-agent" // eslint-disable-line @typescript-eslint/no-unused-vars
 import { generateMessageId } from "../utils"
 
 export class RiskAnalyst extends BaseAgent {

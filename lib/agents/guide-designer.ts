@@ -1,7 +1,7 @@
 import type { AgentMessage, Guide } from "../types"
 import type { PlanObject } from "./planner-agent"
 import { mockGenome } from "../genome-data"
-import { BaseAgent, type AgentCapabilities, type TaskContext } from "./base-agent"
+import { BaseAgent, type AgentCapabilities, type TaskContext } from "./base-agent" // eslint-disable-line @typescript-eslint/no-unused-vars
 import { generateMessageId } from "../utils"
 
 export class GuideDesigner extends BaseAgent {
