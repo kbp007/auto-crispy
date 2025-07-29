@@ -1,6 +1,6 @@
 import type { AgentMessage, Guide, FinalSummary } from "../types"
 import type { PlanObject } from "./planner-agent"
-import { BaseAgent, type AgentCapabilities, type TaskContext } from "./base-agent"
+import { BaseAgent, type AgentCapabilities } from "./base-agent"
 import { generateMessageId } from "../utils"
 
 export class UndergradAgent extends BaseAgent {
@@ -10,8 +10,8 @@ export class UndergradAgent extends BaseAgent {
 
   defineCapabilities(): AgentCapabilities {
     return {
-      canHandle: (task: TaskContext) => task.type === 'protocol_generation' || task.type === 'generate_summary' || task.type === 'execution_plan' || task.type === 'execution_preparation' || task.type === 'final_protocol_review',
-      estimateSuccess: (task: TaskContext) => {
+      canHandle: (task: any) => task.type === 'protocol_generation' || task.type === 'generate_summary' || task.type === 'execution_plan' || task.type === 'execution_preparation' || task.type === 'final_protocol_review',
+      estimateSuccess: (task: any) => {
         // Use memory to estimate success based on past performance
         const similar = this.memory.longTerm.successfulGuides.filter(g => 
           g.context.includes('protocol') || g.context.includes('summary')
@@ -23,11 +23,11 @@ export class UndergradAgent extends BaseAgent {
     }
   }
 
-  canHandle(_task: TaskContext): boolean {
+  canHandle(_task: any): boolean {
     return _task.type === 'protocol_generation' || _task.type === 'generate_summary' || _task.type === 'execution_plan' || _task.type === 'execution_preparation' || _task.type === 'final_protocol_review'
   }
 
-  estimateSuccess(_task: TaskContext): number {
+  estimateSuccess(_task: any): number {
     // Use memory to estimate success based on past performance
     const similar = this.memory.longTerm.successfulGuides.filter(g => 
       g.context.includes('protocol') || g.context.includes('summary')

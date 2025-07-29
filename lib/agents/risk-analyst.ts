@@ -1,5 +1,5 @@
 import type { AgentMessage, Guide } from "../types"
-import { BaseAgent, type AgentCapabilities, type TaskContext } from "./base-agent"
+import { BaseAgent, type AgentCapabilities } from "./base-agent"
 import { generateMessageId } from "../utils"
 
 export class RiskAnalyst extends BaseAgent {
@@ -9,8 +9,8 @@ export class RiskAnalyst extends BaseAgent {
 
   defineCapabilities(): AgentCapabilities {
     return {
-      canHandle: (task: TaskContext) => task.type === 'risk_assessment' || task.type === 'analyze_risk' || task.type === 'off_target_analysis',
-      estimateSuccess: (task: TaskContext) => {
+      canHandle: (task: any) => task.type === 'risk_assessment' || task.type === 'analyze_risk' || task.type === 'off_target_analysis',
+      estimateSuccess: (task: any) => {
         // Use memory to estimate success based on past performance
         const similar = this.memory.longTerm.successfulGuides.filter(g => 
           g.context.includes('risk') || g.context.includes('off-target')
@@ -22,11 +22,11 @@ export class RiskAnalyst extends BaseAgent {
     }
   }
 
-  canHandle(_task: TaskContext): boolean {
+  canHandle(_task: any): boolean {
     return _task.type === 'risk_assessment' || _task.type === 'analyze_risk' || _task.type === 'off_target_analysis'
   }
 
-  estimateSuccess(_task: TaskContext): number {
+  estimateSuccess(_task: any): number {
     // Use memory to estimate success based on past performance
     const similar = this.memory.longTerm.successfulGuides.filter(g => 
       g.context.includes('risk') || g.context.includes('off-target')
