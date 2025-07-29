@@ -10,8 +10,8 @@ export class UndergradAgent extends BaseAgent {
 
   defineCapabilities(): AgentCapabilities {
     return {
-      canHandle: (task) => task.type === 'protocol_generation' || task.type === 'generate_summary' || task.type === 'execution_plan' || task.type === 'execution_preparation' || task.type === 'final_protocol_review',
-      estimateSuccess: (task) => {
+      canHandle: (task: TaskContext) => task.type === 'protocol_generation' || task.type === 'generate_summary' || task.type === 'execution_plan' || task.type === 'execution_preparation' || task.type === 'final_protocol_review',
+      estimateSuccess: (task: TaskContext) => {
         // Use memory to estimate success based on past performance
         const similar = this.memory.longTerm.successfulGuides.filter(g => 
           g.context.includes('protocol') || g.context.includes('summary')
@@ -21,6 +21,26 @@ export class UndergradAgent extends BaseAgent {
       requiredResources: ['Protocol templates', 'Lab procedures database'],
       dependencies: ['RiskAnalyst']
     }
+  }
+
+  canHandle(task: TaskContext): boolean {
+    return task.type === 'protocol_generation' || task.type === 'generate_summary' || task.type === 'execution_plan' || task.type === 'execution_preparation' || task.type === 'final_protocol_review'
+  }
+
+  estimateSuccess(task: TaskContext): number {
+    // Use memory to estimate success based on past performance
+    const similar = this.memory.longTerm.successfulGuides.filter(g => 
+      g.context.includes('protocol') || g.context.includes('summary')
+    )
+    return similar.length > 0 ? 0.85 : 0.7
+  }
+
+  async processIncomingMessage(from: string, message: Record<string, unknown>): Promise<unknown> {
+    // Handle incoming messages from other agents
+    if (message.type === 'protocol_request') {
+      return this.finalizeSummary(message.plan as PlanObject, message.guides as Guide[])
+    }
+    return null
   }
 
   async finalizeSummary(plan: PlanObject, guides: Guide[]): Promise<FinalSummary> {

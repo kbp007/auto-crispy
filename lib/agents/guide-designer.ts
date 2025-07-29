@@ -11,8 +11,8 @@ export class GuideDesigner extends BaseAgent {
 
   defineCapabilities(): AgentCapabilities {
     return {
-      canHandle: (task) => task.type === 'guide_design' || task.type === 'design_guides',
-      estimateSuccess: (task) => {
+      canHandle: (task: TaskContext) => task.type === 'guide_design' || task.type === 'design_guides',
+      estimateSuccess: (task: TaskContext) => {
         // Use memory to estimate success based on past performance
         const similar = this.memory.longTerm.successfulGuides.filter(g => 
           g.context.includes(task.gene || '') || g.context.includes(task.editType || '')
@@ -22,6 +22,26 @@ export class GuideDesigner extends BaseAgent {
       requiredResources: ['Genome database', 'PAM site analysis'],
       dependencies: ['PlannerAgent']
     }
+  }
+
+  canHandle(task: TaskContext): boolean {
+    return task.type === 'guide_design' || task.type === 'design_guides'
+  }
+
+  estimateSuccess(task: TaskContext): number {
+    // Use memory to estimate success based on past performance
+    const similar = this.memory.longTerm.successfulGuides.filter(g => 
+      g.context.includes(task.gene || '') || g.context.includes(task.editType || '')
+    )
+    return similar.length > 0 ? 0.95 : 0.8
+  }
+
+  async processIncomingMessage(from: string, message: Record<string, unknown>): Promise<unknown> {
+    // Handle incoming messages from other agents
+    if (message.type === 'guide_request') {
+      return this.designGuides(message as unknown as PlanObject)
+    }
+    return null
   }
 
   async designGuides(plan: PlanObject): Promise<Guide[]> {

@@ -9,8 +9,8 @@ export class RiskAnalyst extends BaseAgent {
 
   defineCapabilities(): AgentCapabilities {
     return {
-      canHandle: (task) => task.type === 'risk_assessment' || task.type === 'analyze_risk' || task.type === 'off_target_analysis',
-      estimateSuccess: (task) => {
+      canHandle: (task: TaskContext) => task.type === 'risk_assessment' || task.type === 'analyze_risk' || task.type === 'off_target_analysis',
+      estimateSuccess: (task: TaskContext) => {
         // Use memory to estimate success based on past performance
         const similar = this.memory.longTerm.successfulGuides.filter(g => 
           g.context.includes('risk') || g.context.includes('off-target')
@@ -20,6 +20,26 @@ export class RiskAnalyst extends BaseAgent {
       requiredResources: ['Genome database', 'Off-target prediction algorithms'],
       dependencies: ['GuideDesigner']
     }
+  }
+
+  canHandle(task: TaskContext): boolean {
+    return task.type === 'risk_assessment' || task.type === 'analyze_risk' || task.type === 'off_target_analysis'
+  }
+
+  estimateSuccess(task: TaskContext): number {
+    // Use memory to estimate success based on past performance
+    const similar = this.memory.longTerm.successfulGuides.filter(g => 
+      g.context.includes('risk') || g.context.includes('off-target')
+    )
+    return similar.length > 0 ? 0.9 : 0.75
+  }
+
+  async processIncomingMessage(from: string, message: Record<string, unknown>): Promise<unknown> {
+    // Handle incoming messages from other agents
+    if (message.type === 'risk_analysis_request') {
+      return this.analyzeRisk(message.guides as Guide[])
+    }
+    return null
   }
 
   async analyzeRisk(guides: Guide[]): Promise<Guide[]> {

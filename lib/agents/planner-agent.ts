@@ -21,8 +21,8 @@ export class PlannerAgent extends BaseAgent {
 
   defineCapabilities(): AgentCapabilities {
     return {
-      canHandle: (task) => task.type === 'parse_prompt' || task.type === 'plan_experiment',
-      estimateSuccess: (task) => {
+      canHandle: (task: TaskContext) => task.type === 'parse_prompt' || task.type === 'plan_experiment',
+      estimateSuccess: (task: TaskContext) => {
         // Use memory to estimate success based on past performance
         const similar = this.memory.longTerm.successfulGuides.filter(g => 
           (task.gene && g.context.includes(task.gene)) || 
