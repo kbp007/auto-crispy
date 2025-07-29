@@ -32,6 +32,9 @@ jobs:
       
       - name: Build with Next.js
         run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+          NODE_ENV: production
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
