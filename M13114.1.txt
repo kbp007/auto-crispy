@@ -1,0 +1,66 @@
+ID   M13114; SV 1; linear; genomic DNA; STD; HUM; 279 BP.
+XX
+AC   M13114; N00032;
+XX
+DT   26-JUL-1991 (Rel. 28, Created)
+DT   14-NOV-2006 (Rel. 89, Last updated, Version 5)
+XX
+DE   Homo sapiens phosphoprotein p53 (TP53) gene, exon 4.
+XX
+KW   antigen; phosphoprotein; tumor antigen.
+XX
+OS   Homo sapiens (human)
+OC   Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia;
+OC   Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae;
+OC   Homo.
+XX
+RN   [1]
+RP   204-279
+RX   PUBMED; 6396087.
+RA   Matlashewski G., Lamb P., Pim D., Peacock J., Crawford L., Benchimol S.;
+RT   "Isolation and characterization of a human p53 cDNA clone: expression of
+RT   the human p53 gene";
+RL   EMBO J. 3(13):3257-3262(1984).
+XX
+RN   [2]
+RP   1-279
+RX   PUBMED; 2946935.
+RA   Lamb P., Crawford L.;
+RT   "Characterization of the human p53 gene";
+RL   Mol. Cell. Biol. 6(5):1379-1385(1986).
+XX
+DR   MD5; 647b4d42cf2a3ea6391651fec80da5ac.
+DR   Ensembl-Gn; ENSG00000141510; homo_sapiens.
+DR   Ensembl-Tr; ENST00000269305; homo_sapiens.
+DR   Ensembl-Tr; ENST00000420246; homo_sapiens.
+DR   Ensembl-Tr; ENST00000445888; homo_sapiens.
+DR   Ensembl-Tr; ENST00000455263; homo_sapiens.
+DR   Ensembl-Tr; ENST00000504290; homo_sapiens.
+DR   Ensembl-Tr; ENST00000504937; homo_sapiens.
+DR   Ensembl-Tr; ENST00000510385; homo_sapiens.
+DR   Ensembl-Tr; ENST00000610292; homo_sapiens.
+DR   Ensembl-Tr; ENST00000610538; homo_sapiens.
+DR   Ensembl-Tr; ENST00000617185; homo_sapiens.
+DR   Ensembl-Tr; ENST00000619485; homo_sapiens.
+DR   Ensembl-Tr; ENST00000620739; homo_sapiens.
+DR   Ensembl-Tr; ENST00000622645; homo_sapiens.
+XX
+FH   Key             Location/Qualifiers
+FH
+FT   source          1..279
+FT                   /organism="Homo sapiens"
+FT                   /map="17p13.1"
+FT                   /mol_type="genomic DNA"
+FT                   /db_xref="taxon:9606"
+FT   exon            1..279
+FT                   /gene="TP53"
+FT                   /number=4
+FT                   /note="G00-120-445"
+XX
+SQ   Sequence 279 BP; 52 A; 100 C; 67 G; 60 T; 0 other;
+     tcccccttgc cgtcccaagc aatggatgat ttgatgctgt ccccggacga tattgaacaa        60
+     tggttcactg aagacccagg tccagatgaa gctcccagaa tgccagaggc tgctccccgc       120
+     gtggcccctg gaccagcagc tcctacaccg gcggcccctg caccagcccc ctcctggccc       180
+     ctgtcatctt ctgtcccttc ccagaaaacc taccagggca gctacggttt ccgtctgggc       240
+     ttcttgcatt ctgggacagc caagtctgtg acttgcacg                              279
+//
