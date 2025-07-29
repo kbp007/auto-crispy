@@ -9,8 +9,8 @@ export class RiskAnalyst extends BaseAgent {
 
   defineCapabilities(): AgentCapabilities {
     return {
-      canHandle: (task: TaskContext) => task.type === 'risk_assessment' || task.type === 'analyze_risk' || task.type === 'off_target_analysis',
-      estimateSuccess: (task: TaskContext) => {
+      canHandle: (task: TaskContext) => task.type === 'risk_assessment' || task.type === 'analyze_risk' || task.type === 'off_target_analysis', // eslint-disable-line @typescript-eslint/no-unused-vars
+      estimateSuccess: (task: TaskContext) => { // eslint-disable-line @typescript-eslint/no-unused-vars
         // Use memory to estimate success based on past performance
         const similar = this.memory.longTerm.successfulGuides.filter(g => 
           g.context.includes('risk') || g.context.includes('off-target')

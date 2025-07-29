@@ -10,8 +10,8 @@ export class UndergradAgent extends BaseAgent {
 
   defineCapabilities(): AgentCapabilities {
     return {
-      canHandle: (task: TaskContext) => task.type === 'protocol_generation' || task.type === 'generate_summary' || task.type === 'execution_plan' || task.type === 'execution_preparation' || task.type === 'final_protocol_review',
-      estimateSuccess: (task: TaskContext) => {
+      canHandle: (task: TaskContext) => task.type === 'protocol_generation' || task.type === 'generate_summary' || task.type === 'execution_plan' || task.type === 'execution_preparation' || task.type === 'final_protocol_review', // eslint-disable-line @typescript-eslint/no-unused-vars
+      estimateSuccess: (task: TaskContext) => { // eslint-disable-line @typescript-eslint/no-unused-vars
         // Use memory to estimate success based on past performance
         const similar = this.memory.longTerm.successfulGuides.filter(g => 
           g.context.includes('protocol') || g.context.includes('summary')
